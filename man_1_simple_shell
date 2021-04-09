@@ -1,0 +1,18 @@
+.\" Manpage for a "Simple Shell"
+.\" April 2021
+
+
+.TH HSH 1 "April 2021" "HSH"
+.SH NAME
+.B hsh
+Command interpreter (simple shell)
+
+.SH SYNOPSIS
+.B ./hsh
+
+.SH DESCRIPTION
+A shell is a command-line interpreter that executes commands read from a terminal.\
+The hsh shell is a basic implementation of a command line similar to bash.
+
+.SH AUTHORS
+Yosef Samuel, Fortune Mwagambo
