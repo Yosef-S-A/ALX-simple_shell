@@ -93,32 +93,41 @@ char **break_line(char *line)
       token = strtok(NULL, " \t\n\r" );
     }
   tokens[position] = NULL;
+
+  if (tokens[0] != NULL)
+    {
+      if (strcmp(tokens[0], "exit") == 0)
+	exit(0);
+    }
+
   return (tokens);
 }
 
 int main(int argc __attribute__((unused)), char **argv __attribute__((unused)),
          char **environment)
 {
-
-  char *program = NULL;
-  char *line = NULL;
-  size_t len = 0;
-  pid_t pid;
-  char **segments;
-  int status;
-
-  printf ("Madlorien$");
-  getline(&line, &len, stdin);
-  segments = break_line(line);
-  program = _path(segments[0], environment);
-  pid = fork();
-  if (pid == 0)
+  while (1)
     {
-      printf("%s\n",line);
-      if( execve(program, segments, environment) == -1)
-	perror("");
+      char *program = NULL;
+      char *line = NULL;
+      size_t len = 0;
+      pid_t pid;
+      char **segments;
+      int status;
+
+      printf ("Madlorien$");
+      getline(&line, &len, stdin);
+      segments = break_line(line);
+      program = _path(segments[0], environment);
+      pid = fork();
+      if (pid == 0)
+	{
+	  printf("%s\n",line);
+	  if(execve(program, segments, environment) == -1)
+	    perror("");
+	}
+      else
+	waitpid(pid, &status, 0);
     }
-  else
-    waitpid(pid, &status, 0);
   return (0);
 }
