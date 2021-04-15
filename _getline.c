@@ -1,5 +1,6 @@
 #include "shell.h"
 #include "./memofile/memo.h"
+#define BUF_SIZE 1024
 /**
  * _getline - get line from file descrip
  * @lineptr: p to buff
@@ -46,5 +47,5 @@ ssize_t _getline(char **lineptr, size_t *n, int fd, list_t **mt)
 			char_read = 0;
 	}
 	while (char_read)
-	return (count);
+		return (count);
 }
