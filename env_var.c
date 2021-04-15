@@ -23,7 +23,7 @@ char *env_variable(char *dir_tmp, char *text)
 		if (stat(path, &stark) == 0 && stark.st_mode & S_IXUSR)
 			return (path);
 		token = strtok(NULL, ":");
-		free(path)
+		free(path);
 			}
 	return (NULL);
 }
