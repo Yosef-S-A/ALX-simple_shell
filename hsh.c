@@ -1,30 +1,38 @@
 #include "shell.h"
 
+/**
+ * main - run the shell
+ * @argc: argument count
+ * @argv: argument array
+ * @environment: accepts environment parameters
+ *
+ * Return: int
+ */
 int main(int argc __attribute__((unused)), char **argv __attribute__((unused)),
-         char **environment)
+char **environment)
 {
-  while (1)
-    {
-      char *program = NULL;
-      char *line = NULL;
-      size_t len = 0;
-      pid_t pid;
-      char **segments;
-      int status;
+while (1)
+{
+	char *program = NULL;
+	char *line = NULL;
+	size_t len = 0;
+	pid_t pid;
+	char **segments;
+	int status;
 
-      printf ("Madlorien$");
-      getline(&line, &len, stdin);
-      segments = break_line(line);
-      program = _path(segments[0], environment);
-      pid = fork();
-      if (pid == 0)
+	printf("Madlorien$");
+	getline(&line, &len, stdin);
+	segments = break_line(line);
+	program = _path(segments[0], environment);
+	pid = fork();
+	if (pid == 0)
 	{
-	  printf("%s\n",line);
-	  if(execve(program, segments, environment) == -1)
-	    perror("");
+		printf("%s\n", line);
+if (execve(program, segments, environment) == -1)
+	perror("");
 	}
-      else
-	waitpid(pid, &status, 0);
-    }
-  return (0);
+	else
+		waitpid(pid, &status, 0);
+}
+return (0);
 }
